@@ -91,7 +91,7 @@ export default function CTAForm() {
       'Main Business Goal': String(formData.get('businessGoal') ?? '').trim(),
       'Preferred Consultation Date': String(formData.get('consultationDate') ?? '').trim(),
       'Preferred Consultation Time': time,
-      'Time Zone': 'Asia/Katmandu',
+      'Time Zone': 'Asia/Kathmandu',
       _replyto: email,
       _subject: 'New Free Marketing Consultation Request',
       _template: 'table',
@@ -163,10 +163,10 @@ export default function CTAForm() {
             <span className="mb-2 block text-sm font-semibold">Biggest Marketing Challenge <span className="text-red-500">*</span></span>
             <select className="field min-h-14" name="marketingChallenge" required defaultValue="" onChange={handleFieldChange} aria-invalid={Boolean(errors.marketingChallenge)} aria-describedby={errors.marketingChallenge ? 'marketingChallenge-error' : undefined}>
               <option value="" disabled>Select your biggest challenge</option>
-              <option value="Not generating enough qualified leads">Not generating enough qualified leads</option>
-              <option value="Getting attention but not enough sales">Getting attention but not enough sales</option>
-              <option value="Unsure which marketing channels to prioritize">Unsure which marketing channels to prioritize</option>
-              <option value="No clear marketing plan">No clear marketing plan</option>
+              <option value="Not sure which marketing channels to prioritize">Not sure which marketing channels to prioritize</option>
+              <option value="Unsure whether content and campaigns are effective">Unsure whether content and campaigns are effective</option>
+              <option value="Getting attention but not enough relevant inquiries">Getting attention but not enough relevant inquiries</option>
+              <option value="No clear marketing direction">No clear marketing direction</option>
               <option value="Other">Other</option>
             </select>
             <FieldError name="marketingChallenge" message={errors.marketingChallenge} />
@@ -194,7 +194,7 @@ export default function CTAForm() {
               <option value="Evening — 4:00 PM to 7:00 PM">Evening — 4:00 PM to 7:00 PM</option>
               <option value="Flexible">Flexible</option>
             </select>
-            <span id="time-help" className="mt-1.5 block text-xs leading-5 text-[var(--muted)]">Time zone: Asia/Katmandu</span>
+            <span id="time-help" className="mt-1.5 block text-xs leading-5 text-[var(--muted)]">Time zone: Asia/Kathmandu</span>
             <FieldError name="consultationTime" message={errors.consultationTime} />
           </label>
         </div>

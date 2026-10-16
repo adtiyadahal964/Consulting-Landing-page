@@ -2,26 +2,37 @@ import ConsultationCTA from './ConsultationCTA';
 
 export default function Hero() {
   return (
-    <section className="mx-auto max-w-5xl px-5 pb-20 pt-12 text-center sm:px-8 sm:pb-28 sm:pt-20">
-      <p className="eyebrow">Free one-to-one consultation</p>
-      <h1 className="mx-auto mt-5 max-w-5xl break-words text-[clamp(2.25rem,11.5vw,2.55rem)] font-semibold leading-[1.02] tracking-[-.05em] sm:text-6xl lg:text-7xl">
-        Get a Customized AI-Powered Marketing Plan to Generate{' '}
-        <span className="text-[var(--accent)]">More Qualified Leads</span>
-      </h1>
-      <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-[var(--muted)] sm:text-xl">
-        Find out why your current marketing is not bringing enough customers—and what to do next.
-      </p>
-      <div className="mx-auto mt-6 max-w-2xl text-base leading-7 text-[var(--muted)]">
-        <p>
-          This free one-to-one consultation is for small and medium business owners struggling to
-          sell their products or services.
-        </p>
-        <p className="mt-4">
-          During the free 1-hour AI-powered marketing consultation, you will receive a customized
-          digital marketing plan in PDF format that you can immediately implement.
-        </p>
+    <section className="section-shell pt-10 sm:pt-14">
+      <div className="grid items-center gap-10 lg:grid-cols-[.82fr_1.18fr] lg:gap-14">
+        <div className="min-w-0">
+          <p className="eyebrow">Free one-to-one consultation</p>
+          <h1 className="mt-5 break-words text-[clamp(2.55rem,11vw,4.75rem)] font-semibold leading-[.98] tracking-[-.055em]">
+            Find a clearer path through your{' '}
+            <span className="text-[var(--accent)]">digital marketing.</span>
+          </h1>
+          <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--muted)] sm:text-xl">
+            A focused conversation to help you understand what feels unclear, where opportunities
+            may exist, and which marketing priorities deserve your attention.
+          </p>
+          <p className="mt-5 max-w-xl leading-7 text-[var(--muted)]">
+            For small and medium business owners who want practical guidance without inflated promises.
+          </p>
+          <ConsultationCTA />
+          <p className="mt-4 text-sm font-medium text-[var(--muted)]">
+            One-to-one conversation · No obligation
+          </p>
+        </div>
+        <div className="hero-visual glass overflow-hidden rounded-[2rem]">
+          <img
+            src="/images/hero-aaditya.webp"
+            alt="Aaditya Dahal seated at his desk, ready to discuss digital marketing"
+            width={1541}
+            height={1021}
+            fetchPriority="high"
+            className="h-auto w-full object-cover"
+          />
+        </div>
       </div>
-      <ConsultationCTA />
     </section>
   );
 }

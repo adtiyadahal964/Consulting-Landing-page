@@ -23,7 +23,7 @@ export default function ConsultationCTA() {
       onClick={scrollToForm}
       className="primary-button mt-9 inline-flex min-h-14 w-full items-center justify-center px-6 sm:w-auto sm:px-8"
     >
-      Book Free Consultation
+      Book a Free Consultation
     </a>
   );
 }

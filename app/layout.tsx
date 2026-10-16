@@ -9,7 +9,7 @@ const manrope = Manrope({
   display: 'swap',
 });
 
-export const metadata: Metadata = { title: 'Free AI-Powered Marketing Consultation', description: 'Get a customized AI-powered marketing plan to generate more qualified leads.', openGraph: { title: 'Free AI-Powered Marketing Consultation', description: 'Get a customized marketing plan for your business.', type: 'website' } };
+export const metadata: Metadata = { title: 'Free Digital Marketing Consultation | Aaditya Creatives', description: 'Discuss your marketing challenges, priorities, and practical next steps with Aaditya Dahal.', openGraph: { title: 'Free Digital Marketing Consultation | Aaditya Creatives', description: 'A focused one-to-one conversation about your business and digital marketing priorities.', type: 'website' } };
 
 const themeInitializationScript = `
   (() => {
