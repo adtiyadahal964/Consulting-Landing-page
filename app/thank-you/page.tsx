@@ -24,9 +24,17 @@ export default function ThankYouPage() {
           We will review your details and guide you on the next steps.
         </p>
 
-        <div className="glass mt-12 flex aspect-video items-center justify-center rounded-[1.75rem] p-6 text-sm leading-6 text-[var(--muted)]">
-          {/* FUTURE VIMEO URL: Replace this placeholder with a responsive Vimeo iframe. Keep autoplay disabled. */}
-          <span>Video guidance will appear here once the Vimeo URL is provided.</span>
+        <div className="glass mt-12 overflow-hidden rounded-[1.75rem]">
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            className="aspect-video w-full bg-black object-contain"
+            aria-label="Consultation next steps video"
+          >
+            <source src="/media/consultation-next-steps.mp4" type="video/mp4" />
+            Your browser does not support the video player.
+          </video>
         </div>
 
         <a
