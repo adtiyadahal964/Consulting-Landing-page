@@ -4,10 +4,10 @@ export default function About() {
       <div className="glass overflow-hidden rounded-[2rem]">
         <div className="about-image-panel aspect-[16/9] w-full overflow-hidden sm:aspect-[16/7]">
           <img
-            src="/images/hero-aaditya.webp"
-            alt="Aaditya Dahal seated at his desk"
-            width={1541}
-            height={1021}
+            src="/images/hero-golden.webp"
+            alt="Portrait of Aaditya Dahal"
+            width={1024}
+            height={1536}
             loading="lazy"
             className="h-full w-full object-cover object-center"
           />

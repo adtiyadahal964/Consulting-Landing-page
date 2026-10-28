@@ -21,12 +21,12 @@ export default function Hero() {
         </div>
         <div className="hero-visual glass overflow-hidden rounded-[2rem]">
           <img
-            src="/images/hero-golden.webp"
-            alt="Portrait of Aaditya Dahal"
-            width={1024}
-            height={1536}
+            src="/images/hero-aaditya.webp"
+            alt="Aaditya Dahal seated at his desk"
+            width={1541}
+            height={1021}
             fetchPriority="high"
-            className="mx-auto aspect-[4/5] h-auto w-full max-w-[30rem] object-cover object-top lg:max-w-none"
+            className="aspect-[4/3] h-auto w-full object-cover object-center"
           />
         </div>
       </div>
