@@ -1,15 +1,15 @@
 const benefits = [
   {
     title: 'Understand Your Current Challenges',
-    description: 'Look at what you are doing now, what feels difficult, and where opportunities may be getting missed.',
+    description: 'Discuss your existing marketing approach, goals, and the obstacles you want to address.',
   },
   {
     title: 'Identify Relevant Priorities',
-    description: 'Discuss which channels, content, audiences, or tools may deserve more attention for your business.',
+    description: 'Explore which channels, activities, or improvements may deserve your attention.',
   },
   {
     title: 'Explore Practical Next Steps',
-    description: 'Leave the conversation with clear actions you can investigate or begin applying next.',
+    description: 'Discuss realistic actions you can consider based on your business goals and current situation.',
   },
 ];
 
@@ -20,7 +20,7 @@ export default function Benefits() {
         <p className="eyebrow">A useful conversation</p>
         <h2 id="benefits-heading" className="section-title mt-4">What We Can Work Through Together</h2>
         <p className="mt-6 text-lg leading-8 text-[var(--muted)]">
-          The consultation is designed to bring clarity to your situation and identify practical next steps.
+          The consultation is designed to help you review your current situation, understand your priorities, and explore practical next steps.
         </p>
       </div>
       <div className="mt-10 grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">

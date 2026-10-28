@@ -4,15 +4,9 @@ import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
 
 const submissionEndpoint = 'https://formsubmit.co/ajax/adtiyadahal964@gmail.com';
 const requiredFields = ['fullName', 'email', 'marketingChallenge', 'consultationTime'] as const;
-const countryCodes = [
-  '+977 — Nepal', '+91 — India', '+880 — Bangladesh', '+92 — Pakistan', '+94 — Sri Lanka',
-  '+971 — United Arab Emirates', '+974 — Qatar', '+966 — Saudi Arabia', '+44 — United Kingdom',
-  '+1 — United States / Canada', '+61 — Australia', '+64 — New Zealand', '+65 — Singapore',
-  '+60 — Malaysia', '+81 — Japan', '+82 — South Korea', '+49 — Germany', '+33 — France',
-];
 
 type RequiredFieldName = (typeof requiredFields)[number];
-type FieldName = RequiredFieldName | 'businessName' | 'url' | 'whatsapp' | 'businessGoal' | 'consultationDate' | 'otherChallenge';
+type FieldName = RequiredFieldName | 'businessName' | 'url' | 'businessGoal' | 'otherChallenge';
 type Errors = Partial<Record<FieldName | 'form', string>>;
 type RequiredValues = Record<RequiredFieldName, string>;
 
@@ -32,7 +26,6 @@ export default function CTAForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const completedRequiredFields = useMemo(() => requiredFields.filter((field) => requiredValues[field].trim()).length, [requiredValues]);
-  const todayInKathmandu = useMemo(() => new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kathmandu' }), []);
   const showOtherChallenge = requiredValues.marketingChallenge === 'Other';
 
   function handleFieldChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
@@ -62,8 +55,6 @@ export default function CTAForm() {
     const challenge = String(formData.get('marketingChallenge') ?? '').trim();
     const otherChallenge = String(formData.get('otherChallenge') ?? '').trim();
     const time = String(formData.get('consultationTime') ?? '').trim();
-    const phone = String(formData.get('whatsapp') ?? '').trim();
-    const countryCode = String(formData.get('phoneCountryCode') ?? '+977 — Nepal').trim();
     const url = String(formData.get('url') ?? '').trim();
 
     if (!fullName) nextErrors.fullName = 'Enter your full name.';
@@ -72,10 +63,6 @@ export default function CTAForm() {
     if (!challenge) nextErrors.marketingChallenge = 'Choose your biggest marketing challenge.';
     if (challenge === 'Other' && !otherChallenge) nextErrors.otherChallenge = 'Briefly describe the challenge you want to discuss.';
     if (!time) nextErrors.consultationTime = 'Choose a preferred consultation time.';
-    if (phone) {
-      const digitCount = phone.replace(/\D/g, '').length;
-      if (digitCount < 7 || digitCount > 15) nextErrors.whatsapp = 'Enter a valid phone or WhatsApp number.';
-    }
     if (url) {
       try { new URL(url); } catch { nextErrors.url = 'Use a complete address beginning with http:// or https://.'; }
     }
@@ -96,10 +83,8 @@ export default function CTAForm() {
       'Email Address': email,
       'Business Name': String(formData.get('businessName') ?? '').trim(),
       'Website or Social Media Link': url,
-      'Phone / WhatsApp Number': phone ? `${countryCode.split('—')[0].trim()} ${phone}` : '',
       'Biggest Marketing Challenge': challenge === 'Other' ? `Other — ${otherChallenge}` : challenge,
       'Main Business Goal': String(formData.get('businessGoal') ?? '').trim(),
-      'Preferred Consultation Date': String(formData.get('consultationDate') ?? '').trim(),
       'Preferred Consultation Time': time,
       'Time Zone': 'Asia/Kathmandu',
       _replyto: email,
@@ -131,7 +116,7 @@ export default function CTAForm() {
         <p className="text-sm font-semibold text-[var(--muted)]" aria-live="polite">{completedRequiredFields} of {requiredFields.length} required fields complete</p>
       </div>
 
-      <div className="consultation-steps mt-7 space-y-8">
+      <div className="mt-7 space-y-7">
         <div className="form-step grid gap-5 md:grid-cols-2">
           <label className="min-w-0"><span className="field-label">Full Name <span className="text-red-500">*</span></span><input className="field" name="fullName" type="text" autoComplete="name" placeholder="Enter your full name" required onChange={handleFieldChange} aria-invalid={Boolean(errors.fullName)} aria-describedby={errors.fullName ? 'fullName-error' : undefined} /><FieldError name="fullName" message={errors.fullName} /></label>
           <label className="min-w-0"><span className="field-label">Email Address <span className="text-red-500">*</span></span><input className="field" name="email" type="email" autoComplete="email" placeholder="you@example.com" required onChange={handleFieldChange} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? 'email-error' : undefined} /><FieldError name="email" message={errors.email} /></label>
@@ -143,31 +128,20 @@ export default function CTAForm() {
         </div>
 
         <div className="form-step">
-          <div className="field-label flex-wrap gap-2">Phone / WhatsApp Number <OptionalBadge /></div>
-          <div className="grid gap-3 md:grid-cols-[minmax(12rem,.8fr)_minmax(0,1.2fr)]">
-            <label><span className="sr-only">Search or enter country calling code</span><input className="field" name="phoneCountryCode" list="country-codes" defaultValue="+977 — Nepal" aria-label="Search or enter country calling code" /><datalist id="country-codes">{countryCodes.map((country) => <option key={country} value={country} />)}</datalist></label>
-            <label><span className="sr-only">Phone or WhatsApp number</span><input className="field" name="whatsapp" type="tel" inputMode="tel" autoComplete="tel-national" placeholder="Enter your phone or WhatsApp number" onChange={handleFieldChange} aria-invalid={Boolean(errors.whatsapp)} aria-describedby={errors.whatsapp ? 'phone-help whatsapp-error' : 'phone-help'} /></label>
-          </div>
-          <span id="phone-help" className="field-help">Optional — Nepal (+977) is selected by default. Type to search another country.</span><FieldError name="whatsapp" message={errors.whatsapp} />
-        </div>
-
-        <div className="form-step">
           <label><span className="field-label">Biggest Marketing Challenge <span className="text-red-500">*</span></span><select className="field" name="marketingChallenge" required defaultValue="" onChange={handleFieldChange} aria-invalid={Boolean(errors.marketingChallenge)} aria-describedby={errors.marketingChallenge ? 'marketingChallenge-error' : undefined}><option value="" disabled>Select your biggest challenge</option><option>Getting more customers</option><option>Generating leads</option><option>Improving paid advertising</option><option>Content and social media</option><option>Email marketing and lead generation</option><option>Website or landing page</option><option>SEO</option><option>Using AI in marketing</option><option>Other</option></select><FieldError name="marketingChallenge" message={errors.marketingChallenge} /></label>
         </div>
 
         {showOtherChallenge && <div className="form-step"><label><span className="field-label">Describe Your Marketing Challenge <span className="text-red-500">*</span></span><input className="field" name="otherChallenge" type="text" placeholder="What would you like to discuss?" required onChange={handleFieldChange} aria-invalid={Boolean(errors.otherChallenge)} aria-describedby={errors.otherChallenge ? 'otherChallenge-error' : undefined} /><FieldError name="otherChallenge" message={errors.otherChallenge} /></label></div>}
 
-        <div className="form-step"><label><span className="field-label flex-wrap gap-2">Main Business Goal <OptionalBadge /></span><input className="field" name="businessGoal" type="text" placeholder="What would you like to improve or achieve?" onChange={handleFieldChange} /></label></div>
-
         <div className="form-step grid gap-5 md:grid-cols-2">
-          <label className="min-w-0"><span className="field-label flex-wrap gap-2">Preferred Consultation Date <OptionalBadge /></span><input className="field" name="consultationDate" type="date" min={todayInKathmandu} onChange={handleFieldChange} /></label>
+          <label className="min-w-0"><span className="field-label flex-wrap gap-2">Main Business Goal <OptionalBadge /></span><input className="field" name="businessGoal" type="text" placeholder="What would you like to improve or achieve?" onChange={handleFieldChange} /></label>
           <label className="min-w-0"><span className="field-label">Preferred Consultation Time <span className="text-red-500">*</span></span><select className="field" name="consultationTime" required defaultValue="" onChange={handleFieldChange} aria-invalid={Boolean(errors.consultationTime)} aria-describedby={errors.consultationTime ? 'time-help consultationTime-error' : 'time-help'}><option value="" disabled>Choose a suitable time</option><option value="Morning — 9:00 AM to 12:00 PM">Morning — 9:00 AM to 12:00 PM</option><option value="Afternoon — 12:00 PM to 4:00 PM">Afternoon — 12:00 PM to 4:00 PM</option><option value="Evening — 4:00 PM to 7:00 PM">Evening — 4:00 PM to 7:00 PM</option><option value="Flexible">Flexible</option></select><span id="time-help" className="field-help">Time zone: Asia/Kathmandu</span><FieldError name="consultationTime" message={errors.consultationTime} /></label>
         </div>
       </div>
 
       <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       {errors.form && <p role="alert" className="mt-7 rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-700 dark:text-red-300">{errors.form}</p>}
-      <div className="mt-8 sm:pl-8"><button type="submit" disabled={submitting} className="primary-button min-h-14 w-full break-words px-7 py-3 sm:w-auto disabled:cursor-wait disabled:opacity-60">{submitting ? 'Sending your request…' : 'Book a Free Consultation'}</button><p className="mt-3 text-sm text-[var(--muted)]">Your request is only confirmed after it is successfully sent. No spam.</p></div>
+      <div className="mt-8"><button type="submit" disabled={submitting} className="primary-button min-h-14 w-full break-words px-7 py-3 sm:w-auto disabled:cursor-wait disabled:opacity-60">{submitting ? 'Sending your request…' : 'Book a Free Consultation'}</button><p className="mt-3 max-w-xl text-sm text-[var(--muted)]">Your preferred time is a coordination request, not an automatic booking. I&apos;ll contact you after reviewing your details.</p></div>
     </form>
   );
 }

@@ -1,15 +1,15 @@
 const challenges = [
   {
     title: 'Too Many Channels',
-    description: 'It can be difficult to know which platforms and activities deserve your attention and budget.',
+    description: 'Choosing where to invest your time and budget can be difficult when several platforms compete for attention.',
   },
   {
     title: 'Unclear Performance',
-    description: 'Content and campaigns may be active, but the reasons behind their results are not always easy to understand.',
+    description: 'It can be difficult to understand which marketing activities are contributing to your business goals.',
   },
   {
-    title: 'Attention Without Enquiries',
-    description: 'Online visibility does not always translate into conversations with the right potential customers.',
+    title: 'Attention Without Enough Enquiries',
+    description: 'Online engagement does not always translate into meaningful conversations with potential customers.',
   },
 ];
 
@@ -18,9 +18,9 @@ export default function Problem() {
     <section id="challenges" className="section-shell anchor-section" aria-labelledby="challenges-heading">
       <div className="max-w-3xl">
           <p className="eyebrow">The marketing challenge</p>
-          <h2 id="challenges-heading" className="section-title mt-4">Marketing Feels Harder When Every Channel Looks Important</h2>
+          <h2 id="challenges-heading" className="section-title mt-4">Your Marketing Needs a Clearer Direction</h2>
           <p className="mt-6 text-lg leading-8 text-[var(--muted)]">
-            You may be posting, running campaigns, or trying new ideas without a clear way to decide what deserves your time and budget.
+            Being active online doesn&apos;t always mean your marketing is working effectively. Understanding where to focus can help you make better-informed decisions.
           </p>
       </div>
         <div className="mt-10 grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -36,7 +36,7 @@ export default function Problem() {
             </article>
           ))}
         </div>
-        <p className="mt-8 max-w-2xl border-l-2 border-[var(--accent)] pl-5 text-lg leading-8 text-[var(--muted)]">A clearer review of your situation can help identify where to focus next.</p>
+        <p className="mt-8 max-w-2xl border-l-2 border-[var(--accent)] pl-5 text-lg leading-8 text-[var(--muted)]">Let&apos;s explore what&apos;s happening in your marketing and identify practical areas to improve.</p>
     </section>
   );
 }
