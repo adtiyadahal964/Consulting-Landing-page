@@ -1,18 +1,18 @@
 export default function About() {
   return (
     <section id="about" className="section-shell anchor-section" aria-labelledby="about-heading">
-      <div className="glass grid overflow-hidden rounded-[2rem] md:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)]">
-        <div className="min-w-0 self-center overflow-hidden">
+      <div className="glass grid overflow-hidden rounded-[2rem] md:grid-cols-[minmax(0,.92fr)_minmax(0,1.08fr)]">
+        <div className="min-w-0 overflow-hidden md:self-stretch">
           <img
             src="/images/hero-golden.webp"
             alt="Portrait of Aaditya Dahal"
             width={1024}
             height={1536}
             loading="lazy"
-            className="block h-auto w-full"
+            className="block h-auto w-full md:h-full md:object-cover md:object-top"
           />
         </div>
-        <div className="min-w-0 p-7 sm:p-10 lg:p-12">
+        <div className="min-w-0 p-7 sm:p-10 md:px-8 md:py-6 lg:px-10 lg:py-8 xl:px-12">
           <p className="eyebrow">About me</p>
           <h2 id="about-heading" className="section-title mt-4">Hi, I’m Aaditya Dahal.</h2>
           <div className="mt-8 grid gap-7 xl:grid-cols-2 xl:gap-10">
