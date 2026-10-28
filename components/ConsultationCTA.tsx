@@ -2,7 +2,7 @@
 
 import type { MouseEvent } from 'react';
 
-export default function ConsultationCTA() {
+export default function ConsultationCTA({ compact = false, onNavigate }: { compact?: boolean; onNavigate?: () => void }) {
   function scrollToForm(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
 
@@ -15,13 +15,14 @@ export default function ConsultationCTA() {
       block: 'start',
     });
     window.history.replaceState(null, '', '#consultation-form');
+    onNavigate?.();
   }
 
   return (
     <a
       href="#consultation-form"
       onClick={scrollToForm}
-      className="primary-button mt-9 inline-flex min-h-14 w-full items-center justify-center px-6 sm:w-auto sm:px-8"
+      className={`primary-button inline-flex items-center justify-center px-6 ${compact ? 'min-h-11 text-sm' : 'mt-9 min-h-14 w-full sm:w-auto sm:px-8'}`}
     >
       Book a Free Consultation
     </a>

@@ -1,9 +1,9 @@
 export default function About() {
   return (
-    <section className="section-shell" aria-labelledby="about-heading">
+    <section id="about" className="section-shell anchor-section" aria-labelledby="about-heading">
       <div className="glass overflow-hidden rounded-[2rem]">
         <div className="grid items-end lg:grid-cols-[.88fr_1.12fr]">
-          <div className="portrait-panel flex min-h-[28rem] items-end justify-center px-6 pt-8 sm:min-h-[34rem] sm:px-10">
+          <div className="portrait-panel flex min-h-[22rem] items-end justify-center px-6 pt-8 sm:min-h-[30rem] sm:px-10 lg:min-h-[34rem]">
             <img
               src="/images/aaditya-portrait.webp"
               alt="Portrait of Aaditya Dahal"
@@ -17,16 +17,16 @@ export default function About() {
             <p className="eyebrow">About me</p>
             <h2 id="about-heading" className="section-title mt-4">Hi, I’m Aaditya Dahal.</h2>
             <p className="mt-6 text-lg leading-8 text-[var(--muted)]">
-              I’m developing my work in AI-powered digital marketing with a simple focus: helping business owners make better sense of their marketing choices.
+              I’m developing my professional practice in AI-powered digital marketing, with a focus on helping businesses understand their options and make more practical marketing decisions.
             </p>
             <p className="mt-5 leading-7 text-[var(--muted)]">
-              My approach begins with listening. I want to understand your business, the audience you are trying to reach, and the challenges behind your current marketing before discussing possible directions.
+              My approach begins with understanding the business, its audience, current marketing, and the challenges affecting its growth. From there, I focus on clear communication, useful research, and practical next steps.
             </p>
             <p className="mt-5 leading-7 text-[var(--muted)]">
-              You can expect practical thinking, transparent communication, and an honest conversation about what may be worth exploring next.
+              You can expect clear expectations, honest communication, business-focused thinking, and a transparent consultation process.
             </p>
             <div className="mt-8 flex flex-wrap gap-3" aria-label="My approach">
-              {['One-to-one guidance', 'Practical thinking', 'Transparent communication'].map((item) => (
+              {['Clear expectations', 'Practical thinking', 'Honest communication'].map((item) => (
                 <span key={item} className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold">
                   {item}
                 </span>

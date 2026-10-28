@@ -10,19 +10,19 @@ import Process from '../components/Process';
 
 export default function HomePage() {
   return (
-    <main className="bg-glow min-h-screen overflow-hidden">
+    <main id="top" className="bg-glow min-h-screen overflow-hidden">
       <Header />
       <Hero />
       <Problem />
       <Benefits />
       <Process />
       <About />
-      <section id="consultation-form" className="section-shell scroll-mt-6 pb-24 sm:pb-32">
-        <div className="glass rounded-[2rem] p-6 sm:p-10 lg:p-12">
-          <p className="eyebrow">Take the next step</p>
-          <h2 className="section-title mt-4">Let’s Talk About Your Business</h2>
+      <section id="consultation-form" className="section-shell anchor-section pb-24 sm:pb-32" aria-labelledby="consultation-heading">
+        <div className="glass form-panel rounded-[2rem] p-6 sm:p-10 lg:p-12">
+          <p className="eyebrow">Request a consultation</p>
+          <h2 id="consultation-heading" className="section-title mt-4">Let’s Talk About Your Marketing Questions</h2>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-            Share a few details so I can understand what you would like to discuss and prepare for a more useful one-to-one conversation.
+            Share a few details so I can understand what you want to improve and prepare for a useful conversation.
           </p>
           <CTAForm />
         </div>

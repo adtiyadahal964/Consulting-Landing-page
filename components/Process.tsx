@@ -1,28 +1,28 @@
 const steps = [
   {
-    title: 'Share your business details',
-    description: 'Tell me a little about your business, goals, and the marketing challenge you would like to discuss.',
+    title: 'Submit Your Request',
+    description: 'Tell me about your business, current marketing, and the challenge you want to discuss.',
   },
   {
-    title: 'Discuss your goals and challenges',
+    title: 'Discuss Your Goals and Challenges',
     description: 'We will use the consultation to understand your situation and examine the choices in front of you.',
   },
   {
-    title: 'Explore practical next steps',
-    description: 'We will identify sensible areas to focus on, based on the conversation and your current resources.',
+    title: 'Explore Practical Next Steps',
+    description: 'Leave with a clearer direction and practical areas to investigate or work on next.',
   },
 ];
 
 export default function Process() {
   return (
-    <section className="section-shell">
+    <section id="process" className="section-shell anchor-section" aria-labelledby="process-heading">
       <p className="eyebrow">A straightforward process</p>
-      <h2 className="section-title mt-4">How It Works</h2>
-      <div className="mt-10 grid gap-4 md:grid-cols-3">
+      <h2 id="process-heading" className="section-title mt-4">How It Works</h2>
+      <div className="mt-10 grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">
         {steps.map((step, index) => (
-          <article key={step.title} className="glass flex min-h-64 flex-col rounded-[1.75rem] p-7">
+          <article key={step.title} className="glass interactive-card flex h-full flex-col rounded-[1.75rem] p-6 sm:p-7">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent)] font-bold text-[var(--accent-ink)]">
-              {index + 1}
+              {String(index + 1).padStart(2, '0')}
             </div>
             <div className="mt-auto pt-10">
               <h3 className="text-xl font-semibold leading-7">{step.title}</h3>

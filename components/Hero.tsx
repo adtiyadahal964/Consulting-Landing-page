@@ -2,24 +2,23 @@ import ConsultationCTA from './ConsultationCTA';
 
 export default function Hero() {
   return (
-    <section className="section-shell pt-10 sm:pt-14">
+    <section className="section-shell hero-section pt-12 sm:pt-16" aria-labelledby="hero-heading">
       <div className="grid items-center gap-10 lg:grid-cols-[.82fr_1.18fr] lg:gap-14">
         <div className="min-w-0">
           <p className="eyebrow">Free one-to-one consultation</p>
-          <h1 className="mt-5 break-words text-[clamp(2.55rem,11vw,4.75rem)] font-semibold leading-[.98] tracking-[-.055em]">
-            Find a clearer path through your{' '}
-            <span className="text-[var(--accent)]">digital marketing.</span>
+          <h1 id="hero-heading" className="mt-5 break-words text-[clamp(2.5rem,10vw,4.6rem)] font-semibold leading-[1.01] tracking-[-.055em]">
+            Find a Clearer Path Through Your{' '}
+            <span className="text-[var(--accent)]">Digital Marketing</span>
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--muted)] sm:text-xl">
-            A focused conversation to help you understand what feels unclear, where opportunities
-            may exist, and which marketing priorities deserve your attention.
+            Bring your business goals and marketing challenges to a practical conversation about what to improve, where to focus, and what to do next.
           </p>
           <p className="mt-5 max-w-xl leading-7 text-[var(--muted)]">
-            For small and medium business owners who want practical guidance without inflated promises.
+            Receive clear, practical next steps based on your business situation.
           </p>
           <ConsultationCTA />
           <p className="mt-4 text-sm font-medium text-[var(--muted)]">
-            One-to-one conversation · No obligation
+            Practical conversation. No pressure.
           </p>
         </div>
         <div className="hero-visual glass overflow-hidden rounded-[2rem]">
