@@ -26,7 +26,7 @@ export default function Hero() {
             width={1024}
             height={1536}
             fetchPriority="high"
-            className="aspect-[4/5] h-auto w-full object-cover object-top"
+            className="mx-auto aspect-[4/5] h-auto w-full max-w-[30rem] object-cover object-top lg:max-w-none"
           />
         </div>
       </div>
