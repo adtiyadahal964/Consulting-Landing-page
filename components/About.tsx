@@ -2,14 +2,14 @@ export default function About() {
   return (
     <section id="about" className="section-shell anchor-section" aria-labelledby="about-heading">
       <div className="glass grid overflow-hidden rounded-[2rem] md:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)]">
-        <div className="about-image-panel flex min-w-0 items-center justify-center p-3 sm:p-4 md:self-center md:p-5">
+        <div className="min-w-0 self-center overflow-hidden">
           <img
             src="/images/hero-golden.webp"
             alt="Portrait of Aaditya Dahal"
             width={1024}
             height={1536}
             loading="lazy"
-            className="h-auto w-full object-contain"
+            className="block h-auto w-full"
           />
         </div>
         <div className="min-w-0 p-7 sm:p-10 lg:p-12">
