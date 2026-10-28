@@ -1,21 +1,21 @@
 export default function About() {
   return (
     <section id="about" className="section-shell anchor-section" aria-labelledby="about-heading">
-      <div className="glass overflow-hidden rounded-[2rem]">
-        <div className="about-image-panel aspect-[16/9] w-full overflow-hidden sm:aspect-[16/7]">
+      <div className="glass grid overflow-hidden rounded-[2rem] md:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)]">
+        <div className="about-image-panel flex min-w-0 items-center justify-center p-4 sm:p-6 md:p-8">
           <img
             src="/images/hero-golden.webp"
             alt="Portrait of Aaditya Dahal"
             width={1024}
             height={1536}
             loading="lazy"
-            className="h-full w-full object-cover object-center"
+            className="h-auto w-full max-w-[30rem] object-contain"
           />
         </div>
-        <div className="p-7 sm:p-10 lg:p-14">
+        <div className="min-w-0 p-7 sm:p-10 lg:p-12">
           <p className="eyebrow">About me</p>
           <h2 id="about-heading" className="section-title mt-4">Hi, I’m Aaditya Dahal.</h2>
-          <div className="mt-8 grid gap-7 lg:grid-cols-[1.02fr_.98fr] lg:gap-12">
+          <div className="mt-8 grid gap-7 xl:grid-cols-2 xl:gap-10">
             <div>
               <p className="text-lg leading-8 text-[var(--muted)]">
                 I&apos;m building my work at the intersection of AI and digital marketing, with a focus on helping small and growing businesses approach their marketing more strategically.
