@@ -1,7 +1,6 @@
 import About from '../components/About';
 import Benefits from '../components/Benefits';
 import CTAForm from '../components/CTAForm';
-import FinalCTA from '../components/FinalCTA';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -27,7 +26,6 @@ export default function HomePage() {
           <CTAForm />
         </div>
       </section>
-      <FinalCTA />
       <Footer />
     </main>
   );
