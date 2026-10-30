@@ -3,13 +3,14 @@
 import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
 import AnimatedSelect from './AnimatedSelect';
 
-const submissionEndpoint = 'https://formsubmit.co/ajax/adtiyadahal964@gmail.com';
+const submissionEndpoint = '/api/consultation/';
 const requiredFields = ['fullName', 'email', 'marketingChallenge', 'consultationTime'] as const;
 
 type RequiredFieldName = (typeof requiredFields)[number];
 type FieldName = RequiredFieldName | 'businessName' | 'url' | 'businessGoal' | 'otherChallenge';
 type Errors = Partial<Record<FieldName | 'form', string>>;
 type RequiredValues = Record<RequiredFieldName, string>;
+type SubmissionResponse = { success?: boolean; message?: string };
 
 const initialRequiredValues: RequiredValues = { fullName: '', email: '', marketingChallenge: '', consultationTime: '' };
 const marketingChallengeOptions = [
@@ -43,6 +44,7 @@ export default function CTAForm() {
   const [requiredValues, setRequiredValues] = useState<RequiredValues>(initialRequiredValues);
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const completedRequiredFields = useMemo(() => requiredFields.filter((field) => requiredValues[field].trim()).length, [requiredValues]);
   const showOtherChallenge = requiredValues.marketingChallenge === 'Other';
 
@@ -107,19 +109,15 @@ export default function CTAForm() {
 
     setSubmitting(true);
     const payload = {
-      'Full Name': fullName,
-      'Email Address': email,
-      'Business Name': String(formData.get('businessName') ?? '').trim(),
-      'Website or Social Media Link': url,
-      'Biggest Marketing Challenge': challenge === 'Other' ? `Other — ${otherChallenge}` : challenge,
-      'Main Business Goal': String(formData.get('businessGoal') ?? '').trim(),
-      'Preferred Consultation Time': time,
-      'Time Zone': 'Asia/Kathmandu',
-      _replyto: email,
-      _subject: 'New Free Marketing Consultation Request',
-      _template: 'table',
-      _captcha: 'false',
-      _honey: String(formData.get('_honey') ?? ''),
+      fullName,
+      email,
+      businessName: String(formData.get('businessName') ?? '').trim(),
+      url,
+      marketingChallenge: challenge,
+      otherChallenge,
+      businessGoal: String(formData.get('businessGoal') ?? '').trim(),
+      consultationTime: time,
+      honey: String(formData.get('_honey') ?? ''),
     };
 
     try {
@@ -128,17 +126,18 @@ export default function CTAForm() {
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      const result = (await response.json().catch(() => null)) as { success?: boolean | string; message?: string } | null;
-      if (!response.ok || result?.success === false || result?.success === 'false') throw new Error(result?.message || 'Submission failed');
-      window.location.assign('/thank-you');
+      const result = (await response.json().catch(() => null)) as SubmissionResponse | null;
+      if (!response.ok || !result?.success) throw new Error(result?.message || 'Submission failed');
+      setSubmitted(true);
+      window.setTimeout(() => window.location.assign('/thank-you/'), 350);
     } catch {
-      setErrors({ form: 'Your request could not be sent. Check your connection and try again—your entered details are still here.' });
+      setErrors({ form: 'Your request could not be sent. Please try again in a moment—your entered details are still here.' });
       setSubmitting(false);
     }
   }
 
   return (
-    <form action="https://formsubmit.co/adtiyadahal964@gmail.com" method="POST" onSubmit={handleSubmit} noValidate className="mt-9" aria-busy={submitting}>
+    <form onSubmit={handleSubmit} noValidate className="mt-9" aria-busy={submitting}>
       <div className="flex flex-col gap-2 border-b border-[var(--line)] pb-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-[var(--muted)]">Fields marked <span className="text-red-500">*</span> are required.</p>
         <p className="text-sm font-semibold text-[var(--muted)]" aria-live="polite">{completedRequiredFields} of {requiredFields.length} required fields complete</p>
@@ -168,8 +167,9 @@ export default function CTAForm() {
       </div>
 
       <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+      {submitted && <p role="status" className="mt-7 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-800 dark:text-emerald-200">Your request was sent successfully. Taking you to the next steps…</p>}
       {errors.form && <p role="alert" className="mt-7 rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-700 dark:text-red-300">{errors.form}</p>}
-      <div className="mt-8"><button type="submit" disabled={submitting} className="primary-button min-h-14 w-full break-words px-7 py-3 sm:w-auto disabled:cursor-wait disabled:opacity-60">{submitting ? 'Sending your request…' : 'Book a Free Consultation'}</button><p className="mt-3 max-w-xl text-sm text-[var(--muted)]">Your preferred time is a coordination request, not an automatic booking. I&apos;ll contact you after reviewing your details.</p></div>
+      <div className="mt-8"><button type="submit" disabled={submitting} className="primary-button min-h-14 w-full break-words px-7 py-3 sm:w-auto disabled:cursor-wait disabled:opacity-60">{submitted ? 'Request sent' : submitting ? 'Sending your request…' : 'Book a Free Consultation'}</button><p className="mt-3 max-w-xl text-sm text-[var(--muted)]">Your preferred time is a coordination request, not an automatic booking. I&apos;ll contact you after reviewing your details.</p></div>
     </form>
   );
 }
