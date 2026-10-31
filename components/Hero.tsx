@@ -8,7 +8,7 @@ export default function Hero() {
           <p className="eyebrow">Free one-to-one consultation</p>
           <h1 id="hero-heading" className="mt-5 break-words text-[clamp(2.5rem,10vw,4.5rem)] font-semibold leading-[1.01] tracking-[-.055em]">
             Get a Clearer{' '}
-            <span className="text-[var(--accent)]">Digital Marketing Plan</span>{' '}
+            <span className="editorial-highlight">Digital Marketing Plan</span>{' '}
             for Your Business
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--muted)] sm:text-xl">

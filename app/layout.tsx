@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
+import { Inter, Manrope, Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '../components/ThemeProvider';
 
@@ -8,6 +8,10 @@ const manrope = Manrope({
   variable: '--font-manrope',
   display: 'swap',
 });
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-ui', display: 'swap' });
+const playfairDisplay = Playfair_Display({ subsets: ['latin'], variable: '--font-editorial', style: ['italic'], display: 'swap' });
 
 export const metadata: Metadata = { title: 'Free Digital Marketing Consultation | Aaditya Creatives', description: 'Discuss your marketing challenges, priorities, and practical next steps with Aaditya Dahal.', openGraph: { title: 'Free Digital Marketing Consultation | Aaditya Creatives', description: 'A focused one-to-one conversation about your business and digital marketing priorities.', type: 'website' } };
 
@@ -30,7 +34,7 @@ const themeInitializationScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={manrope.variable} suppressHydrationWarning>
+    <html lang="en" className={`${manrope.variable} ${inter.variable} ${plusJakartaSans.variable} ${playfairDisplay.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitializationScript }} />
       </head>

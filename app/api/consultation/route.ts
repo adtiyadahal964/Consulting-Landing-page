@@ -2,11 +2,9 @@ type ConsultationRequest = {
   fullName?: unknown;
   email?: unknown;
   businessName?: unknown;
+  phoneNumber?: unknown;
   url?: unknown;
-  marketingChallenge?: unknown;
-  otherChallenge?: unknown;
-  businessGoal?: unknown;
-  consultationTime?: unknown;
+  businessChallenge?: unknown;
   honey?: unknown;
 };
 
@@ -47,19 +45,15 @@ export async function POST(request: Request) {
   const fullName = text(body.fullName, 120);
   const email = text(body.email, 254).toLowerCase();
   const businessName = text(body.businessName, 160);
+  const phoneNumber = text(body.phoneNumber, 40);
   const url = text(body.url, 500);
-  const marketingChallenge = text(body.marketingChallenge, 200);
-  const otherChallenge = text(body.otherChallenge, 300);
-  const businessGoal = text(body.businessGoal, 500);
-  const consultationTime = text(body.consultationTime, 120);
+  const businessChallenge = text(body.businessChallenge, 1000);
   const honey = text(body.honey, 200);
 
   if (honey) return Response.json({ success: true });
-  if (!fullName || !EMAIL_PATTERN.test(email) || !marketingChallenge || !consultationTime) {
+  const phoneDigits = phoneNumber.replace(/\D/g, '');
+  if (fullName.length < 2 || businessName.length < 2 || !EMAIL_PATTERN.test(email) || phoneDigits.length < 7 || phoneDigits.length > 15) {
     return Response.json({ success: false, message: 'Please complete all required fields with valid information.' }, { status: 400 });
-  }
-  if (marketingChallenge === 'Other' && !otherChallenge) {
-    return Response.json({ success: false, message: 'Please describe the marketing challenge you want to discuss.' }, { status: 400 });
   }
   if (url) {
     try {
@@ -80,7 +74,6 @@ export async function POST(request: Request) {
     return Response.json({ success: false, message: 'The consultation service is temporarily unavailable. Please try again shortly.' }, { status: 503 });
   }
 
-  const challenge = marketingChallenge === 'Other' ? `Other — ${otherChallenge}` : marketingChallenge;
   const html = `
     <div style="font-family:Arial,sans-serif;color:#111827;line-height:1.5">
       <h1 style="font-size:22px">New consultation request</h1>
@@ -88,11 +81,9 @@ export async function POST(request: Request) {
         ${row('Full Name', fullName)}
         ${row('Email Address', email)}
         ${row('Business Name', businessName)}
+        ${row('Phone / WhatsApp Number', phoneNumber)}
         ${row('Website or Social Media Link', url)}
-        ${row('Biggest Marketing Challenge', challenge)}
-        ${row('Main Business Goal', businessGoal)}
-        ${row('Preferred Consultation Time', consultationTime)}
-        ${row('Time Zone', 'Asia/Kathmandu')}
+        ${row('Main Business Challenge', businessChallenge)}
       </table>
     </div>`;
 
