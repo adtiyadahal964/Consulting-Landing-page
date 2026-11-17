@@ -26,4 +26,13 @@ Vercel will install dependencies and run `npm run build` automatically. Do not p
 
 ## Consultation form
 
-The browser submits to the same-origin `/api/consultation` route. That route validates the payload again and sends the email from the server so provider credentials never reach the browser.
+The consultation form posts directly to the configured Flodesk inline form. Its Flodesk form ID is `6afc66a255c0e21c9329e9e0`, which adds subscribers to the assigned segment and starts its workflow. The existing landing-page layout is retained while the following data is sent to Flodesk:
+
+- Full Name
+- Email Address
+- Phone / WhatsApp Number
+- Business Name
+- Website or Social Media Link
+- Main Business Challenge
+
+Keep the Flodesk form published, assigned to the intended segment, and connected to the intended workflow. The success behavior configured in Flodesk redirects visitors to `/thank-you/`.
