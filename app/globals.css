@@ -36,6 +36,8 @@ button, input, textarea, select { font: inherit; }
 .interactive-card:hover { transform: translateY(-4px); border-color: rgb(var(--accent-rgb) / .4); box-shadow: 0 24px 64px rgb(var(--accent-rgb) / .11); }
 .trust-item { display: grid; grid-template-columns: 1.5rem 1fr; align-items: start; gap: .7rem; color: var(--muted); line-height: 1.6; }
 .trust-item svg { width: 1.35rem; height: 1.35rem; margin-top: .12rem; border-radius: 9999px; padding: .16rem; background: var(--accent-soft); color: var(--accent); }
+.about-copy-grid { display: grid; gap: 1.5rem; max-width: 52rem; }
+.about-expectations { margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
 .accent-panel { background: var(--accent); box-shadow: 0 24px 70px rgb(var(--accent-rgb) / .24); }
 .accent-panel .primary-button { background: var(--accent-ink); color: var(--accent); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
 .accent-panel .primary-button:hover { box-shadow: 0 16px 36px rgba(0,0,0,.22); }
@@ -107,7 +109,7 @@ select.field option:checked { background-color: var(--accent); color: var(--acce
 .theme-toggle:focus-visible { --tw-ring-color: rgb(var(--accent-rgb) / .35); }
 @media (min-width: 640px) { .section-shell { padding: 5.5rem 2rem; } }
 @media (min-width: 640px) { .consultation-field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .consultation-field { grid-column: 1 / -1; } .consultation-field-half { grid-column: span 1; } }
-@media (min-width: 1024px) { .section-shell { padding-block: 6.5rem; } .consultation-layout { grid-template-columns: minmax(0, 1.04fr) minmax(20rem, .96fr); } }
+@media (min-width: 1024px) { .section-shell { padding-block: 6.5rem; } .consultation-layout { grid-template-columns: minmax(0, 1.04fr) minmax(20rem, .96fr); } .about-copy-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; } }
 @media (max-width: 1023px) { .hero-section { min-height: auto; } }
 @media (max-width: 639px) { .section-title { font-size: clamp(2rem, 10vw, 2.75rem); } }
 @media (max-width: 359px) { .section-shell { padding-inline: 1rem; } .form-panel { padding: 1.1rem !important; } }

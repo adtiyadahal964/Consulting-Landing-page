@@ -117,8 +117,11 @@ export default function CTAForm() {
       if (!response.ok || !result?.success) throw new Error(result?.message || 'Submission failed');
       setSubmitted(true);
       window.setTimeout(() => window.location.assign('/thank-you/'), 500);
-    } catch {
-      setErrors({ form: 'Your request could not be sent. Please try again in a moment—your entered details are still here.' });
+    } catch (error) {
+      const message = error instanceof Error && error.message !== 'Submission failed'
+        ? error.message
+        : 'Your request could not be sent. Please try again in a moment—your entered details are still here.';
+      setErrors({ form: message });
       setSubmitting(false);
     }
   }

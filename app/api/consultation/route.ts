@@ -38,6 +38,9 @@ export async function POST(request: Request) {
       return Response.json({ success: false, message: 'Unsupported request format.' }, { status: 415 });
     }
     body = await request.json() as ConsultationRequest;
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return Response.json({ success: false, message: 'Invalid submission data.' }, { status: 400 });
+    }
   } catch {
     return Response.json({ success: false, message: 'Invalid submission data.' }, { status: 400 });
   }
@@ -90,6 +93,7 @@ export async function POST(request: Request) {
   try {
     const emailResponse = await fetch(emailApiUrl, {
       method: 'POST',
+      signal: AbortSignal.timeout(12_000),
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',

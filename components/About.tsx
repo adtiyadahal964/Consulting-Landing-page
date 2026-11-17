@@ -4,18 +4,18 @@ export default function About() {
       <div className="glass grid overflow-hidden rounded-[2rem] md:grid-cols-[minmax(0,.92fr)_minmax(0,1.08fr)]">
         <div className="min-w-0 overflow-hidden md:self-stretch">
           <img
-            src="/images/hero-golden.webp"
-            alt="Portrait of Aaditya Dahal"
-            width={1024}
-            height={1536}
+            src="/images/hero-aaditya.webp"
+            alt="Aaditya Dahal working at his desk"
+            width={1541}
+            height={1021}
             loading="lazy"
-            className="block h-auto w-full md:h-full md:object-cover md:object-top"
+            className="block aspect-[4/3] h-auto w-full object-cover object-center md:h-full md:aspect-auto"
           />
         </div>
-        <div className="min-w-0 p-7 sm:p-10 md:px-8 md:py-6 lg:px-10 lg:py-8 xl:px-12">
+        <div className="min-w-0 p-7 sm:p-10 md:px-8 md:py-8 lg:px-10 lg:py-10 xl:px-12">
           <p className="eyebrow">About me</p>
           <h2 id="about-heading" className="section-title mt-4">Hi, I’m Aaditya Dahal.</h2>
-          <div className="mt-8 grid gap-7 xl:grid-cols-2 xl:gap-10">
+          <div className="about-copy-grid mt-8">
             <div>
               <p className="text-lg leading-8 text-[var(--muted)]">
                 I&apos;m building my work at the intersection of AI and digital marketing, with a focus on helping small and growing businesses approach their marketing more strategically.
@@ -31,22 +31,22 @@ export default function About() {
               <p className="mt-5 leading-7 text-[var(--muted)]">
                 My goal is to understand each business&apos;s needs, communicate clearly, and recommend realistic next steps rather than make promises that marketing cannot guarantee.
               </p>
-              <div className="mt-8 border-t border-[var(--line)] pt-6">
-              <h3 className="text-lg font-semibold">What You Can Expect From Me</h3>
-              <ul className="mt-4 grid gap-3" aria-label="What you can expect from me">
-                {[
-                  'Practical, business-focused recommendations.',
-                  'Clear and transparent communication.',
-                  'An honest discussion of opportunities and limitations.',
-                ].map((item) => (
-                  <li key={item} className="trust-item">
-                    <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2"><path d="m5 10 3 3 7-7" /></svg>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              </div>
             </div>
+          </div>
+          <div className="about-expectations">
+            <h3 className="text-lg font-semibold">What You Can Expect From Me</h3>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-3" aria-label="What you can expect from me">
+              {[
+                'Practical, business-focused recommendations.',
+                'Clear and transparent communication.',
+                'An honest discussion of opportunities and limitations.',
+              ].map((item) => (
+                <li key={item} className="trust-item">
+                  <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2"><path d="m5 10 3 3 7-7" /></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
