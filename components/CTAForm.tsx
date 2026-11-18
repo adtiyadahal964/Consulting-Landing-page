@@ -156,7 +156,7 @@ export default function CTAForm() {
   }
 
   return (
-    <div className={`ff-${flodeskFormId}`} data-ff-el="root" data-ff-version="3" data-ff-type="inline" data-ff-stage="default">
+    <div className={`ff-${flodeskFormId}`} data-ff-el="root" data-ff-version="3" data-ff-type="inline" data-ff-name="inlineNoImage" data-ff-stage="default">
       <div data-ff-el="config" data-ff-config={flodeskConfig} className="hidden" />
       <form action={flodeskSubmissionUrl} method="post" data-ff-el="form" onInvalidCapture={handleNativeInvalid} onSubmitCapture={handleSubmit} className="landing-consultation-form" aria-busy={submitting}>
         <div data-ff-el="content">
