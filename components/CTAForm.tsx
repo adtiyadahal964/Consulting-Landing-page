@@ -92,9 +92,27 @@ export default function CTAForm() {
     clearFieldError(fieldName);
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (submitting) return;
+  function handleNativeInvalid(event: FormEvent<HTMLFormElement>) {
+    const fieldElement = event.target as HTMLInputElement | HTMLTextAreaElement;
+    const fieldName = fieldElement.dataset.field as FieldName | undefined;
+    if (!fieldName) return;
+
+    const message = fieldElement.validity.valueMissing
+      ? 'This field is required.'
+      : fieldElement.validity.typeMismatch
+        ? 'Enter a valid value.'
+        : fieldElement.validity.tooShort
+          ? 'Please enter at least 2 characters.'
+          : fieldElement.validationMessage;
+
+    setErrors((current) => ({ ...current, [fieldName]: message }));
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    if (submitting) {
+      event.preventDefault();
+      return;
+    }
 
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
@@ -138,15 +156,16 @@ export default function CTAForm() {
   }
 
   return (
-    <div className={`ff-${flodeskFormId}`} data-ff-el="root">
+    <div className={`ff-${flodeskFormId}`} data-ff-el="root" data-ff-version="3" data-ff-type="inline" data-ff-stage="default">
       <div data-ff-el="config" data-ff-config={flodeskConfig} className="hidden" />
-    <form action={flodeskSubmissionUrl} method="post" data-ff-el="form" onSubmit={handleSubmit} noValidate className="landing-consultation-form" aria-busy={submitting}>
-      <div className="form-progress" data-ff-el="content">
-        <p>Fields marked <span className="text-red-500">*</span> are required.</p>
-        <p aria-live="polite">{completedRequiredFields} of {requiredFields.length} required fields complete</p>
-      </div>
+      <form action={flodeskSubmissionUrl} method="post" data-ff-el="form" onInvalidCapture={handleNativeInvalid} onSubmitCapture={handleSubmit} className="landing-consultation-form" aria-busy={submitting}>
+        <div data-ff-el="content">
+          <div className="form-progress">
+            <p>Fields marked <span className="text-red-500">*</span> are required.</p>
+            <p aria-live="polite">{completedRequiredFields} of {requiredFields.length} required fields complete</p>
+          </div>
 
-      <div className="consultation-field-grid" data-ff-el="fields">
+          <div className="consultation-field-grid" data-ff-el="fields">
         <label className="consultation-field consultation-field-half">
           <span className="field-label">Full Name <span className="text-red-500">*</span></span>
           <input className="field" name="firstName" data-field="fullName" type="text" autoComplete="name" minLength={2} placeholder="Enter your full name" required onChange={handleFieldChange} aria-invalid={Boolean(errors.fullName)} aria-describedby={errors.fullName ? 'fullName-error' : undefined} />
@@ -167,7 +186,7 @@ export default function CTAForm() {
 
         <label className="consultation-field">
           <span className="field-label">Phone / WhatsApp Number <span className="text-red-500">*</span></span>
-          <input className="field" name="fields.phoneWhatsappNumber" data-field="phoneNumber" type="tel" autoComplete="tel" inputMode="tel" placeholder="+977 98XXXXXXXX" required onChange={handleFieldChange} aria-invalid={Boolean(errors.phoneNumber)} aria-describedby={errors.phoneNumber ? 'phoneNumber-help phoneNumber-error' : 'phoneNumber-help'} />
+          <input className="field" name="fields.phoneWhatsappNumber" data-field="phoneNumber" type="tel" autoComplete="tel" inputMode="tel" pattern="[0-9+()\\s-]{7,}" placeholder="+977 98XXXXXXXX" required onChange={handleFieldChange} aria-invalid={Boolean(errors.phoneNumber)} aria-describedby={errors.phoneNumber ? 'phoneNumber-help phoneNumber-error' : 'phoneNumber-help'} />
           <span id="phoneNumber-help" className="field-help">Include your country code.</span>
           <FieldError name="phoneNumber" message={errors.phoneNumber} />
         </label>
@@ -184,16 +203,17 @@ export default function CTAForm() {
           <textarea className="field field-textarea" name="fields.anythingYouWantToSay" data-field="businessChallenge" rows={3} maxLength={1000} placeholder="Tell me briefly what is getting in the way of your business growth" onChange={handleFieldChange} aria-describedby="businessChallenge-help" />
           <span id="businessChallenge-help" className="field-help">A short overview is enough—we can discuss the details during the call.</span>
         </label>
-      </div>
+          </div>
 
-      <input type="text" name="confirm_email_address" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-      {errors.form && <p role="alert" className="form-error-message">{errors.form}</p>}
+          <input type="text" name="confirm_email_address" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+          {errors.form && <p role="alert" className="form-error-message">{errors.form}</p>}
 
-      <button type="submit" data-ff-el="submit" disabled={submitting} className="primary-button consultation-submit">
-        {submitting ? 'Sending Your Request…' : 'Book My Free Consultation'}
-      </button>
-      <p className="form-privacy-note">Your information will only be used to respond to your consultation request.</p>
-    </form>
+          <button type="submit" data-ff-el="submit" disabled={submitting} className="primary-button consultation-submit">
+            {submitting ? 'Sending Your Request…' : 'Book My Free Consultation'}
+          </button>
+          <p className="form-privacy-note">Your information will only be used to respond to your consultation request.</p>
+        </div>
+      </form>
     </div>
   );
 }
